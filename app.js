@@ -19,6 +19,49 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeHelp();
 });
 
+// Optional integrations are enabled after their public site code/access key is configured.
+const GOATCOUNTER_SITE_CODE = "";
+if (GOATCOUNTER_SITE_CODE) {
+  const tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.dataset.goatcounter = `https://${GOATCOUNTER_SITE_CODE}.goatcounter.com/count`;
+  document.head.append(tracker);
+}
+
+const feedbackForm = document.querySelector("#feedback-form");
+if (feedbackForm) {
+  const WEB3FORMS_ACCESS_KEY = "";
+  const feedbackFields = feedbackForm.querySelectorAll("input, textarea, button[type=submit]");
+  const feedbackStatus = document.querySelector("#feedback-status");
+  if (WEB3FORMS_ACCESS_KEY) {
+    feedbackFields.forEach((field) => { field.disabled = false; });
+    feedbackStatus.textContent = "Сообщение отправится мне через Web3Forms.";
+    feedbackForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const submitButton = feedbackForm.querySelector("button[type=submit]");
+      const payload = new FormData(feedbackForm);
+      payload.set("access_key", WEB3FORMS_ACCESS_KEY);
+      payload.set("subject", "Отзыв с Fisch2tors");
+      payload.set("from_name", "Fisch2tors");
+      payload.set("botcheck", "");
+      submitButton.disabled = true;
+      feedbackStatus.textContent = "Отправляю сообщение…";
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", { method: "POST", body: payload });
+        const result = await response.json();
+        if (!response.ok || !result.success) throw new Error("submission failed");
+        feedbackForm.reset();
+        feedbackStatus.textContent = "Спасибо! Сообщение отправлено.";
+      } catch {
+        feedbackStatus.textContent = "Не получилось отправить сообщение. Попробуй ещё раз позже.";
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  }
+}
+
 const guideSearch = document.querySelector("#guide-search");
 if (guideSearch) {
   const input = document.querySelector("#guide-query");
@@ -44,6 +87,24 @@ if (guideSearch) {
     { title: "Flimsy Rod", type: "Удочка · инструкция", url: "flimsy-guide.html", terms: ["flimsy rod", "flimsy", "стартовая удочка", "флимси"] },
     { title: "Plastic Rod", type: "Удочка · инструкция", url: "plastic-guide.html", terms: ["plastic rod", "plastic", "пластиковая удочка", "пластик"] },
     { title: "Volcanic Rod", type: "Удочка · инструкция", url: "volcanic-guide.html", terms: ["volcanic rod", "volcanic", "вулканическая удочка", "волканик"] },
+    ...[
+      ["Training Rod", "training", "rod-training", ["training rod", "тренировочная удочка"]], ["Long Rod", "long", "rod-long", ["long rod", "лонг род"]],
+      ["Fast Rod", "fast", "rod-fast", ["fast rod", "фаст род"]], ["Lucky Rod", "lucky", "rod-lucky", ["lucky rod", "лакки род"]],
+      ["Decayed Rod", "decayed", "rod-decayed", ["decayed rod", "декаед род"]], ["Stone Rod", "stone", "rod-stone", ["stone rod", "стоун род"]],
+      ["Firefly Rod", "firefly", "rod-firefly", ["firefly rod", "файрфлай род"]], ["Fortune Rod", "fortune", "rod-fortune", ["fortune rod", "фортун род"]],
+      ["Frog Rod", "frog", "rod-frog", ["frog rod", "фрог род"]], ["Rapid Rod", "rapid", "rod-rapid", ["rapid rod", "рэпид род"]],
+      ["Reinforced Rod", "reinforced", "rod-reinforced", ["reinforced rod", "ринфорсд род"]], ["Arctic Rod", "arctic", "rod-arctic", ["arctic rod", "арктик род"]],
+      ["Splitbranch Twig", "splitbranch", "rod-splitbranch-twig", ["splitbranch twig"]], ["Coral Rod", "coral", "rod-coral", ["coral rod", "корал род"]],
+      ["Avalanche Rod", "avalanche", "rod-avalanche", ["avalanche rod", "аваланш род"]], ["Crystalized Rod", "crystalized", "rod-crystalized", ["crystalized rod"]],
+      ["Artisan Rod", "artisan", "rod-artisan", ["artisan rod"]], ["Depthseeker Rod", "depthseeker", "rod-depthseeker", ["depthseeker rod"]],
+      ["Scurvy Rod", "scurvy", "rod-scurvy", ["scurvy rod"]], ["Wildflower Rod", "wildflower", "rod-wildflower", ["wildflower rod"]],
+      ["Boreal Rod", "boreal", "rod-boreal", ["boreal rod"]], ["Carrot Rod", "carrot", "rod-carrot", ["carrot rod"]],
+      ["Phoenix Rod", "phoenix", "rod-phoenix", ["phoenix rod", "феникс род"]], ["Treasure Rod", "treasure", "rod-treasure", ["treasure rod"]],
+      ["Ice Warpers Rod", "ice-warpers", "rod-ice-warpers", ["ice warpers rod"]], ["Blazebringer Rod", "blazebringer", "rod-blazebringer", ["blazebringer rod"]],
+      ["Mythical Rod", "mythical", "rod-mythical", ["mythical rod"]], ["King’s Rod", "kings", "rod-kings", ["kings rod", "king's rod", "королевская удочка"]],
+      ["Tempest Rod", "tempest", "rod-tempest", ["tempest rod"]], ["Poseidon Rod", "poseidon", "rod-poseidon", ["poseidon rod"]],
+      ["Zeus Rod", "zeus", "rod-zeus", ["zeus rod"]], ["Rod of the Depths", "depths", "rod-depths", ["rod of the depths", "удочка глубин"]]
+    ].map(([title, id, anchor, terms]) => ({ title, type: "Удочка · карточка", url: `rods.html#${anchor}`, terms: [...terms, title] })),
 
     { title: "Aurora Totem", type: "Предмет", url: "items.html#item-aurora-totem", terms: ["aurora totem", "тотем авроры"] },
     { title: "Alligator", type: "Предмет", url: "items.html#item-alligator", terms: ["alligator", "аллигатор"] },
@@ -58,6 +119,12 @@ if (guideSearch) {
     { title: "Submarine", type: "Предмет", url: "items.html#item-submarine", terms: ["submarine", "субмарина", "субмарину"] },
     { title: "Glimmerfin Suit Level 1", type: "Предмет", url: "items.html#item-glimmerfin-suit", terms: ["glimmerfin suit", "костюм glimmerfin"] },
     { title: "Submarine Heat Upgrade", type: "Предмет", url: "items.html#item-submarine-heat-upgrade", terms: ["submarine heat upgrade", "heat upgrade", "тепловое улучшение"] },
+    { title: "GPS", type: "Предмет", url: "items.html#item-gps", terms: ["gps", "координаты", "джипиэс"] },
+    { title: "Basic Diving Gear", type: "Предмет", url: "items.html#item-basic-diving-gear", terms: ["basic diving gear", "базовое снаряжение для дайвинга"] },
+    { title: "Advanced Diving Gear", type: "Предмет", url: "items.html#item-advanced-diving-gear", terms: ["advanced diving gear", "улучшенное снаряжение для дайвинга"] },
+    { title: "Glider", type: "Предмет", url: "items.html#item-glider", terms: ["glider", "глайдер"] },
+    { title: "Flippers", type: "Предмет", url: "items.html#item-flippers", terms: ["flippers", "ласты"] },
+    { title: "Tidebreaker", type: "Предмет", url: "items.html#item-tidebreaker", terms: ["tidebreaker", "тайдбрейкер"] },
 
     { title: "Moosewood", type: "Локация", url: "locations.html#location-moosewood", terms: ["moosewood", "мусвуд"] },
     { title: "Strange Whirlpool", type: "Локация", url: "locations.html#location-strange-whirlpool", terms: ["strange whirlpool", "водоворот", "странный водоворот"] },
@@ -75,6 +142,19 @@ if (guideSearch) {
     { title: "Toxic Grove / Nectar Den", type: "Локация", url: "locations.html#location-toxic-grove-nectar-den", terms: ["toxic grove", "nectar den", "токсик гроув", "нектар ден"] },
     { title: "Verdant Pocket", type: "Локация", url: "locations.html#location-verdant-pocket", terms: ["verdant pocket", "вердант покет"] },
     { title: "Mariana’s Veil / Volcanic Vents", type: "Локация", url: "locations.html#location-mariana-volcanic-vents", terms: ["mariana's veil", "mariana’s veil", "volcanic vents", "марианас вейл", "вулканик вентс"] }
+    ,{ title: "Castaway Cliffs", type: "Локация", url: "locations.html#location-castaway-cliffs", terms: ["castaway cliffs"] }
+    ,{ title: "Ancient Isle", type: "Локация", url: "locations.html#location-ancient-isle", terms: ["ancient isle", "эншент айл"] }
+    ,{ title: "Everturn Forest", type: "Локация", url: "locations.html#location-everturn-forest", terms: ["everturn forest"] }
+    ,{ title: "Coral Bastion", type: "Локация", url: "locations.html#location-coral-bastion", terms: ["coral bastion"] }
+    ,{ title: "Frigid Cavern", type: "Локация", url: "locations.html#location-frigid-cavern", terms: ["frigid cavern"] }
+    ,{ title: "Overgrowth Caves", type: "Локация", url: "locations.html#location-overgrowth-caves", terms: ["overgrowth caves"] }
+    ,{ title: "Skycrest", type: "Локация", url: "locations.html#location-skycrest", terms: ["skycrest"] }
+    ,{ title: "Atlantis", type: "Локация", url: "locations.html#location-atlantis", terms: ["atlantis", "атлантис"] }
+    ,{ title: "Boreal Pines", type: "Локация", url: "locations.html#location-boreal-pines", terms: ["boreal pines"] }
+    ,{ title: "Carrot Garden", type: "Локация", url: "locations.html#location-carrot-garden", terms: ["carrot garden"] }
+    ,{ title: "Treasure Island", type: "Локация", url: "locations.html#location-treasure-island", terms: ["treasure island"] }
+    ,{ title: "Keepers Altar", type: "Локация", url: "locations.html#location-keepers-altar", terms: ["keepers altar"] }
+    ,{ title: "The Depths", type: "Локация", url: "locations.html#location-the-depths", terms: ["the depths"] }
   ];
 
   const normalize = (value) => value.toLocaleLowerCase("ru").replace(/[’']/g, " ").replace(/[^\p{L}\p{N}]+/gu, " ").trim().replace(/\s+/g, " ");
