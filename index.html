@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fisch2tors</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="help-widget" id="help-widget">
+      <button class="help-button" id="help-button" type="button" aria-label="Что такое Fisch?" aria-expanded="false" aria-controls="fisch-info">?</button>
+      <section class="help-panel" id="fisch-info" role="dialog" aria-labelledby="help-title" aria-hidden="true">
+        <button class="help-close" id="help-close" type="button" aria-label="Закрыть">×</button>
+        <h2 id="help-title">Что такое Fisch?</h2>
+        <p><strong>Fisch</strong> — это <strong>популярный симулятор рыбалки и приключенческая игра в открытом мире на платформе Roblox</strong>, вышедшая 5 октября 2024 года. Изначально игру создал разработчик WoozyNate, а позже она перешла под управление Do Big Studios.</p>
+      </section>
+    </div>
+    <header>
+      <div class="hero">
+        <div>
+          <h1>Fisch2tors</h1>
+          <p class="tagline">Инструкции по локациям, предметам и удочкам в Fisch</p>
+        </div>
+        <img class="brand-logo" src="artwork/fisch-logo-black.png" alt="Логотип Fisch" />
+      </div>
+      <nav class="menu" aria-label="Разделы сайта">
+        <a href="locations.html">Локации</a>
+        <a href="items.html">Предметы</a>
+        <a href="rods.html">Удочки</a>
+        <a href="index.html#news">Новости</a>
+        <a class="home-link" href="index.html" aria-label="На главную" title="На главную">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" />
+          </svg>
+        </a>
+      </nav>
+    </header>
+    <main class="home-main">
+      <section class="search-area" aria-label="Поиск по инструкциям">
+        <form id="guide-search" role="search">
+          <label for="guide-query">Поиск по инструкциям</label>
+          <div class="search-row">
+            <input id="guide-query" name="q" type="search" placeholder="Удочка, предмет или локация" autocomplete="off" aria-autocomplete="list" aria-controls="search-suggestions" aria-expanded="false" />
+            <button type="submit">Найти</button>
+          </div>
+          <div class="search-suggestions" id="search-suggestions" role="listbox" aria-label="Подходящие результаты" hidden></div>
+          <p class="search-status" id="search-status" aria-live="polite"></p>
+        </form>
+      </section>
+          <section class="admin-schedule" aria-labelledby="admin-schedule-title">
+        <p class="admin-eyebrow">РАСПИСАНИЕ СОБЫТИЙ</p>
+        <h2 id="admin-schedule-title">Admin Abuse</h2>
+        <p class="admin-countdown-label">До предполагаемого начала Admin Abuse по МСК:</p>
+        <p class="admin-countdown" id="admin-countdown" aria-live="off">Считаю время…</p>
+        <p class="admin-next-date" id="admin-next-date"></p>
+        <p class="admin-times">Обычно событие проходит по субботам около 19:00 МСК — примерно за час до обновления.</p>
+        <p class="admin-note">Это ориентир, а не точное расписание: разработчики могут изменить время или пропустить событие.</p>
+        <a class="admin-game-link" href="https://www.roblox.com/games/16732694052/Fisch" target="_blank" rel="noopener noreferrer">Открыть Fisch в Roblox ↗</a>
+      </section>
+      <section id="news" class="news-home-section" aria-labelledby="news-title">
+        <div class="news-card">
+          <p class="news-eyebrow">СПАСИБО</p>
+          <h2 id="news-title">Спасибо, что вы со мной!</h2>
+          <img class="news-profile" src="artwork/tiktok-profile.png" alt="Скриншот TikTok-профиля tuff_susie: 162 подписчика и 726 лайков" />
+          <p class="news-caption">Вас уже больше 150 — спасибо вам!</p>
+        </div>
+      </section>
+    </main>
+    <footer class="thanks">
+      <h2>Особая благодарность</h2>
+
+      <p>@Nopopuporvali · @deem23215 · @1x1x1xG_oshaucrania</p>
+      <p>Создатель сайта — @masterdoors55</p>
+    </footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>

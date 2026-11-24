@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fungal Rod — Fisch2tors</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="help-widget" id="help-widget">
+      <button class="help-button" id="help-button" type="button" aria-label="Что такое Fisch?" aria-expanded="false" aria-controls="fisch-info">?</button>
+      <section class="help-panel" id="fisch-info" role="dialog" aria-labelledby="help-title" aria-hidden="true">
+        <button class="help-close" id="help-close" type="button" aria-label="Закрыть">×</button>
+        <h2 id="help-title">Что такое Fisch?</h2>
+        <p><strong>Fisch</strong> — это <strong>популярный симулятор рыбалки и приключенческая игра в открытом мире на платформе Roblox</strong>, вышедшая 5 октября 2024 года. Изначально игру создал разработчик WoozyNate, а позже она перешла под управление Do Big Studios.</p>
+      </section>
+    </div>
+    <header>
+      <div class="hero">
+        <div>
+          <h1>Fisch2tors</h1>
+          <p class="tagline">Инструкции по локациям, предметам и удочкам в Fisch</p>
+        </div>
+        <img class="brand-logo" src="artwork/fisch-logo-black.png" alt="Логотип Fisch" />
+      </div>
+      <nav class="menu" aria-label="Разделы сайта">
+        <a href="locations.html">Локации</a>
+        <a href="items.html">Предметы</a>
+        <a href="rods.html">Удочки</a>
+        <a href="index.html#news">Новости</a>
+        <a class="home-link" href="index.html" aria-label="На главную" title="На главную">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" />
+          </svg>
+        </a>
+      </nav>
+    </header>
+    <main class="guide-page">
+      <a class="guide-back" href="rods.html">← Назад к удочкам</a>
+      <h2 class="guide-page-title">Инструкция по Fungal Rod</h2>
+      <div class="aurora-layout">
+        <section class="guide-panel guide-rod" aria-labelledby="guide-rod-title">
+          <h2 id="guide-rod-title">Удочка</h2>
+          <img src="artwork/fungal-rod.png" alt="Удочка Fungal Rod" />
+        </section>
+        <section class="guide-panel guide-instructions" aria-labelledby="steps-title">
+          <h2 id="steps-title">Пошаговая инструкция</h2>
+          <article class="guide-step"><span class="guide-step-number">1</span><div><h3>Отправляйся в Mushgrove Swamp</h3><p>Поймай Alligator в болотной части острова.</p></div></article>
+          <article class="guide-step"><span class="guide-step-number">2</span><div><h3>Найди Agaric</h3><p>Он сидит под большим грибом рядом с палаткой.</p></div></article>
+          <article class="guide-step"><span class="guide-step-number">3</span><div><h3>Покажи ему Alligator</h3><p>Поговори с Agaric и покажи улов — он выдаст Fungal Rod и титул Vigilante.</p></div></article>
+        </section>
+        <section class="guide-panel guide-items" aria-labelledby="items-title">
+          <h2 id="items-title">Предметы</h2>
+          <ul class="guide-list"><li>Alligator — поймай его в Mushgrove Swamp.</li><li>Деньги на покупку не нужны: удочка выдаётся за квест.</li></ul>
+        </section>
+        <section class="guide-panel guide-location" aria-labelledby="location-title">
+          <h2 id="location-title">Локация</h2>
+          <ul class="guide-list"><li>Mushgrove Swamp, Alligator Marsh.</li><li>Agaric: X: 2601, Y: 132, Z: -730.</li></ul>
+        </section>
+      </div>
+      <p class="guide-source">Источники: <a href="https://fisch.wiki/wiki/fungal-rod/" target="_blank" rel="noreferrer">Fungal Rod</a> · <a href="https://fisch.wiki/wiki/agaric/" target="_blank" rel="noreferrer">Agaric</a>.</p>
+
+    </main>
+    <footer class="thanks">
+      <h2>Особая благодарность</h2>
+
+      <p>@Nopopuporvali · @deem23215 · @1x1x1xG_oshaucrania</p>
+      <p>Создатель сайта — @masterdoors55</p>
+    </footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>
